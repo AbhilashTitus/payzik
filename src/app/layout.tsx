@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: "Payzik | The Unified Payment Orchestration Layer",
   description: "Optimise payment success and manage multiple aggregators through a single integration. Built for scale, designed for reliability.",
   keywords: ["payment orchestration", "payment gateway", "fintech", "payment aggregation", "digital payments"],
