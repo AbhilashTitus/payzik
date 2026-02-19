@@ -24,7 +24,7 @@ const Hero = () => {
                             src="/assets/Image/hero image v2.png"
                             alt="Man using phone for payment"
                             fill
-                            className="object-cover object-center"
+                            className="object-contain object-center"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />

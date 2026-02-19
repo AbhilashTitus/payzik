@@ -1,28 +1,28 @@
 'use client';
 
 import Image from 'next/image';
-import { Wrench, Route, Brain, DraftingCompass } from 'lucide-react';
+
 
 const capabilities = [
     {
         title: 'Built for Scale and Reliability',
         description: 'Always-on infrastructure with built-in redundancy and failover.',
-        icon: Wrench,
+        icon: '/assets/icons/ion_build.svg',
     },
     {
         title: 'Intelligent Multi-PA Routing',
         description: 'Smart transaction routing to improve success rates and reduce failures.',
-        icon: Route,
+        icon: '/assets/icons/solar_routing-2-bold.svg',
     },
     {
         title: 'Payment Intelligence',
         description: 'Clear visibility into transaction outcomes, retries, and performance.',
-        icon: Brain,
+        icon: '/assets/icons/hugeicons_artificial-intelligence-01.svg',
     },
     {
         title: 'Compliance Architecture',
         description: 'Designed to work with RBI-licensed PAs while operating strictly as a TSP.',
-        icon: DraftingCompass,
+        icon: '/assets/icons/ic_baseline-architecture.svg',
     },
 ];
 
@@ -62,8 +62,14 @@ const CoreCapabilities = () => {
                                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                                     className="flex items-center gap-6 p-6 lg:p-7 bg-[#F1EDF7] rounded-[1.25rem] transition-all duration-300"
                                 >
-                                    <div className="flex-none h-12 w-12 flex items-center justify-center text-[#111827]">
-                                        <item.icon size={36} strokeWidth={1.5} />
+                                    <div className="flex-none h-12 w-12 flex items-center justify-center">
+                                        <Image
+                                            src={item.icon}
+                                            alt={item.title}
+                                            width={36}
+                                            height={36}
+                                            className="w-9 h-9"
+                                        />
                                     </div>
                                     <div>
                                         <h3 className="text-xl lg:text-[1.35rem] font-semibold text-[#111827] mb-1 leading-tight tracking-tight">

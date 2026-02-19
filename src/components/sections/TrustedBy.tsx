@@ -65,8 +65,8 @@ const TrustedBy = () => {
                         transition={{ duration: 0.8, delay: 0.1 }}
                         className="flex flex-col gap-6 lg:gap-8"
                     >
-                        <TrustCard item={trustItems[0]} />
-                        <TrustCard item={trustItems[3]} />
+                        <TrustCard item={trustItems[0]} className="h-[230px] lg:h-[250px]" />
+                        <TrustCard item={trustItems[3]} className="h-[310px] lg:h-[350px]" />
                     </motion.div>
 
                     {/* Middle Column */}
@@ -77,8 +77,8 @@ const TrustedBy = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="flex flex-col gap-6 lg:gap-8"
                     >
-                        <TrustCard item={trustItems[1]} />
-                        <TrustCard item={trustItems[4]} />
+                        <TrustCard item={trustItems[1]} className="h-[310px] lg:h-[350px]" />
+                        <TrustCard item={trustItems[4]} className="h-[230px] lg:h-[250px]" />
                     </motion.div>
 
                     {/* Right Column */}
@@ -90,7 +90,7 @@ const TrustedBy = () => {
                         className="flex flex-col gap-6 lg:gap-8 min-h-full"
                     >
                         <div className="flex-1">
-                            <TrustCard item={trustItems[2]} isFullHeight />
+                            <TrustCard item={trustItems[2]} className="h-full min-h-[564px] lg:min-h-[632px]" />
                         </div>
                     </motion.div>
                 </div>
@@ -99,12 +99,12 @@ const TrustedBy = () => {
     );
 };
 
-const TrustCard = ({ item, isFullHeight = false }: { item: any, isFullHeight?: boolean }) => {
+const TrustCard = ({ item, className = '' }: { item: any, className?: string }) => {
     return (
         <motion.div
             whileHover={{ y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={`relative group overflow-hidden rounded-[2.5rem] bg-gray-100 ${isFullHeight ? 'h-full min-h-[400px]' : 'min-h-[280px]'}`}
+            className={`relative group overflow-hidden rounded-[2.5rem] bg-gray-100 ${className}`}
         >
             <Image
                 src={item.image}
@@ -118,7 +118,7 @@ const TrustCard = ({ item, isFullHeight = false }: { item: any, isFullHeight?: b
                     {item.title}
                 </h3>
                 {item.description && (
-                    <p className="text-white/70 text-base lg:text-lg font-normal leading-snug">
+                    <p className="text-white/70 text-base lg:text-lg font-normal leading-snug max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-out group-hover:max-h-24 group-hover:opacity-100 group-hover:mt-2">
                         {item.description}
                     </p>
                 )}
