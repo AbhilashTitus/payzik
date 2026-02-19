@@ -6,6 +6,7 @@ import Image from 'next/image';
 const trustItems = [
     {
         title: 'College fees',
+        description: 'Seamless college fee payments with complete security and instant confirmation.',
         image: '/assets/Image/Trust image/fees.png',
         className: 'col-span-1 row-span-1',
     },
@@ -17,16 +18,19 @@ const trustItems = [
     },
     {
         title: 'Travel',
+        description: 'Plan, pay, and travel effortlessly fast bookings with secure payments.',
         image: '/assets/Image/Trust image/Travel.png',
         className: 'col-span-1 row-span-3',
     },
     {
         title: 'Bills',
+        description: 'Every bill paid on time with speed, security, and zero hassle.',
         image: '/assets/Image/Trust image/bill.png',
         className: 'col-span-1 row-span-2',
     },
     {
         title: 'OTT',
+        description: 'Instant OTT renewals with complete security and zero interruptions.',
         image: '/assets/Image/Trust image/OTT.png',
         className: 'col-span-1 row-span-1',
     },
