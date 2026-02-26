@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -9,9 +10,14 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
+    const pathname = usePathname();
+    const isDocsActive = pathname?.startsWith('/api-docs');
+
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProductOpen, setIsProductOpen] = useState(false);
     const [isMobileProductOpen, setIsMobileProductOpen] = useState(false);
+    const [isDevelopersOpen, setIsDevelopersOpen] = useState(false);
+    const [isMobileDevelopersOpen, setIsMobileDevelopersOpen] = useState(false);
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -35,8 +41,13 @@ const Navbar = () => {
         { name: 'Get Started', href: '#' },
     ];
 
+    const developerLinks = [
+        { name: "API Doc's", href: '/api-docs' },
+        { name: 'Authentication', href: '#' },
+        { name: 'Webhooks', href: '#' },
+    ];
+
     const navLinks = [
-        { name: 'Developers', href: '#' },
         { name: 'Company', href: '#' },
     ];
 
@@ -48,7 +59,7 @@ const Navbar = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b-[1.5px] border-gray-100 transition-all duration-300"
             >
-                <div className="mx-auto flex h-20 max-w-7xl items-center px-6 lg:px-12">
+                <div className="flex h-20 w-full items-center px-6 lg:px-12">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 mr-auto cursor-pointer z-50">
                         <Image
@@ -101,11 +112,48 @@ const Navbar = () => {
                             </div>
                         </div>
 
+                        {/* Developers Dropdown */}
+                        <div
+                            className="relative group py-4"
+                            onMouseEnter={() => setIsDevelopersOpen(true)}
+                            onMouseLeave={() => setIsDevelopersOpen(false)}
+                        >
+                            <button className={cn(
+                                "flex items-center gap-1.5 text-[16px] font-medium transition-colors group-hover:text-brand-purple cursor-pointer",
+                                isDocsActive ? "text-brand-purple" : "text-gray-600"
+                            )}>
+                                Developers
+                                <ChevronDown className={cn("h-4 w-4 transition-transform duration-300", isDevelopersOpen && "rotate-180")} />
+                            </button>
+
+                            <div className={cn(
+                                "absolute top-full -left-12 w-[320px] bg-white/95 backdrop-blur-3xl rounded-[24px] border border-gray-100 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.12)] transition-all duration-300 origin-top-left flex overflow-hidden",
+                                isDevelopersOpen ? "opacity-100 visible scale-100 translate-y-4" : "opacity-0 invisible scale-95 translate-y-2"
+                            )}>
+                                <div className="flex w-full p-6">
+                                    <div className="pr-6 border-r border-[#d4d4d8] flex flex-col justify-start shrink-0">
+                                        <span className="text-[18px] font-medium text-brand-purple tracking-tight border-b-2 border-brand-purple pb-1 inline-block w-fit mt-1">API's</span>
+                                    </div>
+                                    <div className="pl-6 flex flex-col justify-start gap-5 mt-1">
+                                        {developerLinks.map((link) => (
+                                            <Link
+                                                key={link.name}
+                                                href={link.href}
+                                                className="text-[17px] font-medium text-gray-600 hover:text-brand-purple transition-all"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-[16px] font-medium text-gray-600 hover:text-brand-purple transition-colors"
+                                className="text-[16px] font-medium text-gray-600 hover:text-brand-purple transition-colors py-4"
                             >
                                 {link.name}
                             </Link>
@@ -113,9 +161,12 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop CTA Button */}
-                    <div className="hidden md:flex md:items-center pl-8">
-                        <Button className="bg-[#5B1BBF] hover:bg-[#4c16a1] text-white rounded-full px-7 py-5 text-sm font-medium shadow-lg shadow-brand-purple/20 transition-transform active:scale-95">
-                            Request Demo
+                    <div className="hidden md:flex md:items-center gap-8 pl-8">
+                        <Link href="/login" className="text-[16px] font-semibold text-brand-purple hover:text-[#4c16a1] transition-colors">
+                            Log in
+                        </Link>
+                        <Button className="bg-[#5B1BBF] hover:bg-[#4c16a1] text-white rounded-full px-7 py-3 text-[16px] font-medium transition-transform active:scale-95 h-12">
+                            Sign up
                         </Button>
                     </div>
 
@@ -175,6 +226,36 @@ const Navbar = () => {
                             </div>
                         </div>
 
+                        {/* Mobile Developers Accordion */}
+                        <div className="flex flex-col">
+                            <button
+                                className={cn(
+                                    "flex items-center justify-between text-2xl font-semibold transition-colors border-b border-gray-50 pb-4",
+                                    isDocsActive ? "text-brand-purple" : "text-gray-900 hover:text-brand-purple"
+                                )}
+                                onClick={() => setIsMobileDevelopersOpen(!isMobileDevelopersOpen)}
+                            >
+                                Developers
+                                <ChevronDown className={cn("h-6 w-6 transition-transform", isMobileDevelopersOpen && "rotate-180")} />
+                            </button>
+
+                            <div className={cn(
+                                "flex flex-col gap-4 overflow-hidden transition-all duration-300 pl-4",
+                                isMobileDevelopersOpen ? "max-h-[500px] mt-4 opacity-100" : "max-h-0 opacity-0"
+                            )}>
+                                {developerLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className="text-lg text-gray-500 font-medium hover:text-brand-purple"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
@@ -189,7 +270,10 @@ const Navbar = () => {
 
                     <div className="mt-auto flex flex-col gap-4 pt-10">
                         <Button className="w-full bg-[#5B1BBF] hover:bg-[#4c16a1] text-white rounded-xl py-6 text-lg font-medium shadow-xl shadow-brand-purple/20">
-                            Request Demo
+                            Sign up
+                        </Button>
+                        <Button className="w-full bg-gray-100 hover:bg-gray-200 text-brand-purple rounded-xl py-6 text-lg font-medium border-none">
+                            Log in
                         </Button>
                     </div>
 

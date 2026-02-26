@@ -126,10 +126,10 @@ const Hero = () => {
                             className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
                         >
                             <Button className="h-12 px-8 rounded-full bg-brand-purple hover:bg-brand-purple/90 text-white font-medium text-base shadow-sm transition-transform active:scale-95 w-full sm:w-auto">
-                                Request Demo
+                                Sign up
                             </Button>
-                            <Button className="h-12 px-8 rounded-full bg-gray-100 hover:bg-gray-200 text-[#111827] font-bold text-base border-none w-full sm:w-auto">
-                                Talk to Sales
+                            <Button className="h-12 px-8 rounded-full bg-gray-100 hover:bg-gray-200 text-brand-purple font-medium text-base border-none w-full sm:w-auto">
+                                Log in
                             </Button>
                         </motion.div>
                     </motion.div>
