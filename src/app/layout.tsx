@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import MaintenanceMode from "@/components/MaintenanceMode";
+
+// Toggle Maintenance Mode here
+const MAINTENANCE_MODE = true;
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
@@ -41,7 +45,11 @@ export default function RootLayout({
         className="font-sans antialiased"
         suppressHydrationWarning
       >
-        {children}
+        {MAINTENANCE_MODE ? (
+          <MaintenanceMode />
+        ) : (
+          children
+        )}
       </body>
     </html>
   );
