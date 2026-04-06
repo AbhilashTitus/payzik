@@ -3,7 +3,7 @@ import "./globals.css";
 import MaintenanceMode from "@/components/MaintenanceMode";
 
 // Toggle Maintenance Mode here
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
